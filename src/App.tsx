@@ -1,10 +1,12 @@
-
+import Container from './components/Container.tsx'
 
 function App() {
 
   return (
     <>
-      <div>helo</div>
+      <div className='flex justify-center items-center h-screen'>
+        <Container />
+      </div>
     </>
   )
 }
