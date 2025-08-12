@@ -83,7 +83,8 @@ export default function TrackPlayer({
   }, [currentIndex]);
 
   const handleEnded = () => {
-    setIsPlaying(false);
+    setCurrentIndex((prev) => (prev + 1) % trackList.length);
+    setIsPlaying(true);
     setProgress(0);
   };
 
@@ -113,9 +114,9 @@ const formatTime = (time: number) => { //per minuti e secondi
 
 
   return (
-    <div className="bg-[#222222] flex flex-col items-center gap-4 p-4 w-65 shadow-sm">
+    <div className="bg-transparent flex flex-col items-center gap-4 p-4 w-65 shadow-sm">
 
-    <div className='w-full py-1.5 cursor-pointer' onClick={handleSeek}>
+    <div className='w-full pb-1.5 cursor-pointer' onClick={handleSeek}>
     <div
         className="w-full h-1 bg-gray-300/30 rounded-sm cursor-pointer "
         onClick={handleSeek}
@@ -143,7 +144,7 @@ const formatTime = (time: number) => { //per minuti e secondi
           onClick={handlePlayPause}
           className=" bg-gray-200 p-5 rounded-full flex items-center justify-center shadow cursor-pointer"
         >
-          {isPlaying ? <img src={pause} alt="play" className='opacity-90 w-6'/> : <img src={play} alt="pause" className='opacity-90 translate-x-0.5 w-8'/>}
+          {isPlaying ? <img src={pause} alt="play" className='opacity-90 w-6'/> : <img src={play} alt="pause" className='opacity-90 translate-x-0.5 w-6'/>}
         </button>
         <button onClick={handleNext} className="rounded-full p-3 pl-3.5 outline outline-white/35 cursor-pointer"><img src={previous} alt="next" className='rotate-180 invert w-5' /></button>
       </div>
