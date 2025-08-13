@@ -14,15 +14,15 @@ export default function TrackCard({ track, toggleLiked }: Props) {
         <div className="bg-transparent flex flex-col w-65 ">
 
             <div className="w-full justify-center ">
-            <div className=" mt-3 mx-3 w-auto size-58 overflow-hidden shadow-[0px_0px_15px_1px_#111111]">
+            <div className=" mt-3 mx-3 w-auto size-58 rounded-lg overflow-hidden shadow-[0px_0px_14px_1px_#000000]">
                 <img src={track.image} alt={track.title} className='rounded-lg object-cover w-full h-full'/>
             </div>
             </div>
 
-            <div className="flex justify-between px-4.5 items-center pt-4.5">
-                <div className="flex-col">
-                    <p className='font-poppins text-white'>{track.title}</p>
-                    <p className='font-poppins text-gray-400 text-xs'>{track.artist}</p>
+            <div className="flex justify-between px-4.5 items-center pt-4.5 pr-5">
+                <div className="flex-col ">
+                    <p className='h-6 font-poppins w-49 text-[1.09rem] text-white truncate tracking-tight'>{track.title}</p>
+                    <p className='font-poppins w-49 text-gray-400 text-xs truncate '>{track.artist}</p>
                 </div>
                 <HeartToggle 
                 liked={track.liked}
