@@ -6,6 +6,7 @@ import { trackList } from '../assets/data/songsData.ts';
 import BigSquare from "./BigSquare.tsx"
 import TrackPlayer from './TrackPlayer.tsx';
 import VolumeBar from './VolumeBar.tsx';
+import ProfileIcon from './ProfileIcon.tsx'
 
 export default function Container() {
 
@@ -22,6 +23,7 @@ export default function Container() {
       )
     );
   };
+
   //volume bar below
   const [volume, setVolume] = useState(75);
 const [isMuted, setIsMuted] = useState(false);
@@ -44,9 +46,15 @@ const handleMuteToggle = () => {
   }
 };
 
+//UNUSED= state in profile icon below
+const [isClicked, setIsClicked] = useState(false);
+    const handleClick = () => {
+        setIsClicked(!isClicked)
+    }
+
   return (
     <div className="rounded-2xl bg-[#111111] border-1 border-[#8b8b8b]">
-  <div className="p-3  rounded-lg grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto_auto] auto-cols-auto auto-rows-auto gap-4 ">
+  <div className="p-4  rounded-lg grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto_auto] auto-cols-auto auto-rows-auto gap-4 ">
 
 <div className="row-span-5">
         <div className='border-1 border-[#8b8b8b] rounded-xl overflow-hidden bg-gradient-to-b from-[#191919] from-0% via-[#222222] via-50% to-[#323232] to-100%'>
@@ -60,11 +68,13 @@ const handleMuteToggle = () => {
       </div>
 </div>   
 
-            <div className="border-1 col-start-2 row-start-1">2</div>
-            <div className="border-1 row-span-4 col-start-2 row-start-2 w-50">3</div>
-            <div className="border-1 col-start-3 row-start-1 h-17 rounded-full">4</div>
+            <div className="border-1 col-start-2 row-start-1">orologioo</div>
+            <div className="border-1 row-span-4 col-start-2 row-start-2 w-50 ">3</div>
+            <div className=" col-start-3 row-start-1 border-[#8b8b8b]">
+              <ProfileIcon toggle={handleClick}/>
+            </div>
 
-            <div className="border-1 row-span-4 col-start-3 rounded-xl px-3">
+            <div className="border-1 row-span-4 col-start-3 rounded-xl px-2">
               <VolumeBar
   volume={volume}
   isMuted={isMuted}
