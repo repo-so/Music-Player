@@ -47,7 +47,7 @@ export default function TrackPlayer({
 
   const currentTime = audioRef.current.currentTime;
 
-  if (currentTime > 2) {
+  if (currentTime > 3) {
     //  Restart current track if more that 2 senkondzz
     audioRef.current.currentTime = 0;
     setProgress(0);
@@ -139,14 +139,14 @@ const formatTime = (time: number) => { //per minuti e secondi
 </div>
 
       <div className="flex items-center  justify-between mb-1.5  -mt-2">
-        <button onClick={handlePrev} className="rounded-full  p-3  outline outline-white/35 cursor-pointer group hover:bg-white/5 active:scale-98 transition-all"><img src={previous} alt="prev" className='invert w-5 pr-0.5'/></button>
+        <button onClick={handlePrev} className=" rounded-full  p-3  outline outline-white/35 cursor-pointer group hover:bg-white/5 active:scale-98 transition-all"><img src={previous} alt="prev" className='invert w-4 -translate-x-[0.06rem]'/></button>
         <button
           onClick={handlePlayPause}
-          className=" bg-gray-200 p-5 rounded-full flex items-center justify-center shadow cursor-pointer mx-6"
+          className=" bg-gray-200 p-5.5 rounded-full flex items-center justify-center shadow cursor-pointer mx-6"
         >
-          {isPlaying ? <img src={pause} alt="play" className='opacity-90 w-6'/> : <img src={play} alt="pause" className='opacity-90 translate-x-0.5 w-6'/>}
+          {isPlaying ? <img src={pause} alt="play" className='opacity-90 w-5'/> : <img src={play} alt="pause" className='opacity-90 translate-x-0.5 w-5'/>}
         </button>
-        <button onClick={handleNext} className="rounded-full p-3 outline outline-white/35 cursor-pointer group hover:bg-white/5 active:scale-98 transition-all "><img src={previous} alt="next" className='rotate-180 invert w-5 pr-0.5' /></button>
+        <button onClick={handleNext} className=" rounded-full p-3 outline outline-white/35 cursor-pointer group hover:bg-white/5 active:scale-98 transition-all "><img src={previous} alt="next" className='rotate-180 invert w-4 translate-x-[0.06rem]' /></button>
       </div>
 
       
