@@ -11,10 +11,10 @@ export default function TrackCard({ track, toggleLiked }: Props) {
   
 
   return (<>
-        <div className="bg-transparent flex flex-col w-65 ">
+        <div className="bg-transparent flex flex-col w-68 ">
 
             <div className="w-full justify-center ">
-            <div className=" mt-3 mx-3 w-auto size-58 rounded-lg overflow-hidden shadow-[0px_0px_14px_1px_#000000]">
+            <div className=" mt-3.5 mx-3.5 w-auto size-58 rounded-lg overflow-hidden shadow-[0px_0px_14px_1px_#000000]">
                 <img src={track.image} alt={track.title} className='rounded-lg object-cover w-full h-full'/>
             </div>
             </div>

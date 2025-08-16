@@ -7,6 +7,7 @@ import BigSquare from "./BigSquare.tsx"
 import TrackPlayer from './TrackPlayer.tsx';
 import VolumeBar from './VolumeBar.tsx';
 import ProfileIcon from './ProfileIcon.tsx'
+import ClockCard from './ClockCard.tsx'
 
 export default function Container() {
 
@@ -59,7 +60,7 @@ const [isClicked, setIsClicked] = useState(false);
   <div className="p-4  rounded-lg grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto_auto] auto-cols-auto auto-rows-auto gap-4 ">
 
 <div className="row-span-5">
-        <div className='border-1 border-[#8b8b8b] rounded-xl overflow-hidden bg-gradient-to-b from-[#191919] from-0% via-[#222222] via-50% to-[#323232] to-100%'>
+        <div className='border-1 border-[#8b8b8b] rounded-xl overflow-hidden bg-gradient-to-b from-[#434343] from-0% via-[#303030] via-50% to-[#191919] to-100%'>
   <BigSquare track={tracks[currentIndex]} 
               toggleLiked={toggleLiked}/>
   <TrackPlayer
@@ -74,8 +75,8 @@ const [isClicked, setIsClicked] = useState(false);
       </div>
 </div>   
 
-            <div className="border-1 col-start-2 row-start-1">orologioo</div>
-            <div className="border-1 row-span-4 col-start-2 row-start-2 w-50 ">3</div>
+            <div className=" col-start-2 row-start-1 rounded-xl"><ClockCard/></div>
+            <div className="border-1 row-span-4 col-start-2 row-start-2 rounded-xl ">tracks list</div>
             <div className=" col-start-3 row-start-1 border-[#8b8b8b]">
               <ProfileIcon toggle={handleClick}/>
             </div>

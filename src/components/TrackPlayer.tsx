@@ -175,7 +175,7 @@ const formatTime = (time: number) => { //per minuti e secondi
 
 
   return (
-    <div className="bg-transparent flex flex-col items-center gap-4 p-4 w-65 shadow-sm">
+    <div className="bg-transparent flex flex-col items-center gap-4 p-4 w-68 shadow-sm">
 
     <div className='w-full pb-1.5 cursor-pointer' onClick={handleSeek}>
     <div
@@ -199,34 +199,34 @@ const formatTime = (time: number) => { //per minuti e secondi
   <span>{formatTime(duration)}</span>
 </div>
 
-      <div className="flex items-center  justify-between mb-1.5  -mt-2">
+      <div className="flex items-center w-full justify-between mb-1.5  -mt-2">
         <button
           onClick={onShuffleToggle}
-          className={`rounded-full p-2 transition-all ${
+          className={`rounded-full cursor-pointer mx-2 transition-all ${
             shuffle 
-              ? 'text-blue-400 bg-blue-400/10' 
-              : 'text-gray-400 hover:text-white hover:bg-white/5'
+              ? 'text-red-500' 
+              : 'text-gray-300 hover:text-white'
           }`}
         >
-          <Shuffle size={16} />
+          <Shuffle size={19} />
         </button>
-        <button onClick={handlePrev} className=" rounded-full  p-3  outline outline-white/35 cursor-pointer group hover:bg-white/5 active:scale-98 transition-all"><img src={previous} alt="prev" className='invert w-4 -translate-x-[0.06rem]'/></button>
+        <button onClick={handlePrev} className=" rounded-full  p-[0.7rem] mx-0.5 outline outline-white/35 cursor-pointer group hover:bg-white/5 active:scale-98 transition-all"><img src={previous} alt="prev" className='invert w-3.5 -translate-x-[0.06rem]'/></button>
         <button
           onClick={handlePlayPause}
-          className=" bg-gray-200 p-5.5 rounded-full flex items-center justify-center shadow cursor-pointer mx-6"
+          className=" bg-gray-200 p-5 rounded-full flex items-center justify-center shadow cursor-pointer mx-2"
         >
-          {isPlaying ? <img src={pause} alt="play" className='opacity-90 w-5'/> : <img src={play} alt="pause" className='opacity-90 translate-x-0.5 w-5'/>}
+          {isPlaying ? <img src={pause} alt="play" className='opacity-90 w-4.5'/> : <img src={play} alt="pause" className='opacity-90 translate-x-0.5 w-4.5'/>}
         </button>
-        <button onClick={handleNext} className=" rounded-full p-3 outline outline-white/35 cursor-pointer group hover:bg-white/5 active:scale-98 transition-all "><img src={previous} alt="next" className='rotate-180 invert w-4 translate-x-[0.06rem]' /></button>
+        <button onClick={handleNext} className=" rounded-full p-[0.7rem] mx-0.5 outline outline-white/35 cursor-pointer group hover:bg-white/5 active:scale-98 transition-all "><img src={previous} alt="next" className='rotate-180 invert w-3.5 translate-x-[0.06rem]' /></button>
       <button
           onClick={onLoopToggle}
-          className={`rounded-full p-2 transition-all ${
+          className={`rounded-full cursor-pointer mx-2 transition-all ${
             loop 
-              ? 'text-green-400 bg-green-400/10' 
-              : 'text-gray-400 hover:text-white hover:bg-white/5'
+              ? 'text-red-500' 
+              : 'text-gray-300 hover:text-white '
           }`}
         >
-          {loop ? <Repeat1 size={16} /> : <Repeat size={16} />}
+          {loop ? <Repeat1 size={19} /> : <Repeat size={19} />}
         </button>
       </div>
 
