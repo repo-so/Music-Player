@@ -11,6 +11,8 @@ import ProfileIcon from './ProfileIcon.tsx'
 export default function Container() {
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [shuffle, setShuffle] = useState(false);
+    const [loop, setLoop] = useState(false);
     
   const [tracks, setTracks] = useState<TrackData[]>(trackList);
 
@@ -64,6 +66,10 @@ const [isClicked, setIsClicked] = useState(false);
         trackList={trackList}
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
+        shuffle={shuffle}
+          loop={loop}
+          onShuffleToggle={() => setShuffle(!shuffle)}
+          onLoopToggle={() => setLoop(!loop)}
       />
       </div>
 </div>   
@@ -76,13 +82,14 @@ const [isClicked, setIsClicked] = useState(false);
 
             <div className="border-1 row-span-4 col-start-3 rounded-xl px-2">
               <VolumeBar
-  volume={volume}
-  isMuted={isMuted}
-  onVolumeChange={handleVolumeChange}
-  onMuteToggle={handleMuteToggle}
-/>
+                    volume={volume}
+                    isMuted={isMuted}
+                    onVolumeChange={handleVolumeChange}
+                    onMuteToggle={handleMuteToggle}
+              />
             </div>
         </div>
     </div>
   )
 }
+ 

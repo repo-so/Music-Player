@@ -6,23 +6,56 @@ import type { TrackData } from '../assets/data/songsData.ts';
 import play from '../assets/svgs/play.svg'
 import pause from '../assets/svgs/pause.svg'
 import previous from '../assets/svgs/previous.svg'
+import { Shuffle, Repeat, Repeat1 } from 'lucide-react';
+
 
 interface Props {
   trackList: TrackData[];
   currentIndex: number;
   setCurrentIndex: Dispatch<SetStateAction<number>>;
+
+  shuffle: boolean;
+  loop: boolean;
+  onShuffleToggle: () => void;
+  onLoopToggle: () => void;
 }
+
+const generateShuffleOrder = (length: number, currentIndex: number) => {
+  const indices = Array.from({ length }, (_, i) => i).filter(i => i !== currentIndex);
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+  return [currentIndex, ...indices]; // Current track first, then shuffled
+};
 
 export default function TrackPlayer({
   trackList,
   currentIndex,
   setCurrentIndex,
+
+  shuffle,
+  loop,
+  onShuffleToggle,
+  onLoopToggle,
 }: Props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  const [shuffleOrder, setShuffleOrder] = useState<number[]>([]);
+  const [shuffleIndex, setShuffleIndex] = useState(0);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const currentTrack = trackList[currentIndex];
+
+  useEffect(() => {
+    if (shuffle) {
+      const newOrder = generateShuffleOrder(trackList.length, currentIndex);
+      setShuffleOrder(newOrder);
+      setShuffleIndex(0);
+    }
+  }, [shuffle, trackList.length, currentIndex]);
+
 
   const handlePlayPause = () => {
     if (!audioRef.current) return;
@@ -37,26 +70,45 @@ export default function TrackPlayer({
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % trackList.length);
+    if (shuffle && shuffleOrder.length > 0) {
+      const nextIndex = shuffleIndex + 1;
+      if (nextIndex < shuffleOrder.length) {
+        setShuffleIndex(nextIndex);
+        setCurrentIndex(shuffleOrder[nextIndex]);
+      } else {
+        //generate new order
+        const newOrder = generateShuffleOrder(trackList.length, currentIndex);
+        setShuffleOrder(newOrder);
+        setShuffleIndex(1);
+        if (newOrder.length > 1) {
+          setCurrentIndex(newOrder[1]);
+        }
+      }
+    } else {
+      setCurrentIndex((prev) => (prev + 1) % trackList.length);
+    }
     setProgress(0);
-    //setIsPlaying(false);
   };
 
   const handlePrev = () => {
     if (!audioRef.current) return;
+    const currentTime = audioRef.current.currentTime;
 
-  const currentTime = audioRef.current.currentTime;
-
-  if (currentTime > 3) {
-    //  Restart current track if more that 2 senkondzz
-    audioRef.current.currentTime = 0;
-    setProgress(0);
-  } else {
-    // Go to previous track
-    setCurrentIndex((prev) => (prev - 1 + trackList.length) % trackList.length);
-    setProgress(0);
-    //setIsPlaying(false);
-  }
+    if (currentTime > 3) {
+      audioRef.current.currentTime = 0;
+      setProgress(0);
+    } else { //shuffle prev
+      if (shuffle && shuffleOrder.length > 0) {
+        const prevIndex = shuffleIndex - 1;
+        if (prevIndex >= 0 && shuffleOrder[prevIndex] !== undefined) {
+          setShuffleIndex(prevIndex);
+          setCurrentIndex(shuffleOrder[prevIndex]);
+        }
+      } else {//normal prev
+        setCurrentIndex((prev) => (prev - 1 + trackList.length) % trackList.length);
+      }
+      setProgress(0);
+    }
   };
 
   const updateProgress = () => {
@@ -83,8 +135,17 @@ export default function TrackPlayer({
   }, [currentIndex]);
 
   const handleEnded = () => {
-    setCurrentIndex((prev) => (prev + 1) % trackList.length);
-    setIsPlaying(true);
+    if (loop) {
+      //loop current track
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      }
+    } else {
+      //normal next no loop
+      handleNext();
+      setIsPlaying(true);
+    }
     setProgress(0);
   };
 
@@ -139,6 +200,16 @@ const formatTime = (time: number) => { //per minuti e secondi
 </div>
 
       <div className="flex items-center  justify-between mb-1.5  -mt-2">
+        <button
+          onClick={onShuffleToggle}
+          className={`rounded-full p-2 transition-all ${
+            shuffle 
+              ? 'text-blue-400 bg-blue-400/10' 
+              : 'text-gray-400 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          <Shuffle size={16} />
+        </button>
         <button onClick={handlePrev} className=" rounded-full  p-3  outline outline-white/35 cursor-pointer group hover:bg-white/5 active:scale-98 transition-all"><img src={previous} alt="prev" className='invert w-4 -translate-x-[0.06rem]'/></button>
         <button
           onClick={handlePlayPause}
@@ -147,6 +218,16 @@ const formatTime = (time: number) => { //per minuti e secondi
           {isPlaying ? <img src={pause} alt="play" className='opacity-90 w-5'/> : <img src={play} alt="pause" className='opacity-90 translate-x-0.5 w-5'/>}
         </button>
         <button onClick={handleNext} className=" rounded-full p-3 outline outline-white/35 cursor-pointer group hover:bg-white/5 active:scale-98 transition-all "><img src={previous} alt="next" className='rotate-180 invert w-4 translate-x-[0.06rem]' /></button>
+      <button
+          onClick={onLoopToggle}
+          className={`rounded-full p-2 transition-all ${
+            loop 
+              ? 'text-green-400 bg-green-400/10' 
+              : 'text-gray-400 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          {loop ? <Repeat1 size={16} /> : <Repeat size={16} />}
+        </button>
       </div>
 
       
@@ -154,9 +235,10 @@ const formatTime = (time: number) => { //per minuti e secondi
             ref={audioRef}
             src={currentTrack.audio}
         onTimeUpdate={() => {
-        updateProgress();
-        updateTime();
-        }}        onEnded={handleEnded}
+                      updateProgress();
+                      updateTime();
+                      }}   
+        onEnded={handleEnded}
         onLoadedMetadata={updateProgress}
                 preload="metadata"
                 hidden
