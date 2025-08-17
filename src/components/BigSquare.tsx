@@ -26,7 +26,10 @@ export default function TrackCard({ track, toggleLiked }: Props) {
                 </div>
                 <HeartToggle 
                 liked={track.liked}
-          onToggle={() => toggleLiked(track.id)}/>
+          onToggle={() => {
+    console.log('Before toggle big square:', track.liked, 'Track ID:', track.id);
+    toggleLiked(track.id);
+  }}/>
             </div>
 
             <div>
@@ -36,3 +39,5 @@ export default function TrackCard({ track, toggleLiked }: Props) {
         </div>
   </>);
 }
+
+ 

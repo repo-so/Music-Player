@@ -8,12 +8,15 @@ import TrackPlayer from './TrackPlayer.tsx';
 import VolumeBar from './VolumeBar.tsx';
 import ProfileIcon from './ProfileIcon.tsx'
 import ClockCard from './ClockCard.tsx'
+import TrackList from './TrackList.tsx'
 
 export default function Container() {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [shuffle, setShuffle] = useState(false);
     const [loop, setLoop] = useState(false);
+
+      const [isPlaying, setIsPlaying] = useState(false);
     
   const [tracks, setTracks] = useState<TrackData[]>(trackList);
 
@@ -26,6 +29,8 @@ export default function Container() {
       )
     );
   };
+
+  
 
   //volume bar below
   const [volume, setVolume] = useState(75);
@@ -49,11 +54,15 @@ const handleMuteToggle = () => {
   }
 };
 
-//UNUSED= state in profile icon below
+// state in profile icon below
 const [isClicked, setIsClicked] = useState(false);
     const handleClick = () => {
         setIsClicked(!isClicked)
     }
+
+const handleTrackSelect = (index: number) => {
+    setCurrentIndex(index);
+  };
 
   return (
     <div className="rounded-2xl bg-[#111111] border-1 border-[#8b8b8b]">
@@ -64,19 +73,28 @@ const [isClicked, setIsClicked] = useState(false);
   <BigSquare track={tracks[currentIndex]} 
               toggleLiked={toggleLiked}/>
   <TrackPlayer
-        trackList={trackList}
+        trackList={tracks}
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
         shuffle={shuffle}
           loop={loop}
           onShuffleToggle={() => setShuffle(!shuffle)}
           onLoopToggle={() => setLoop(!loop)}
+          isPlaying={isPlaying} setIsPlaying={setIsPlaying}
       />
       </div>
 </div>   
 
             <div className=" col-start-2 row-start-1 rounded-xl"><ClockCard/></div>
-            <div className="border-1 row-span-4 col-start-2 row-start-2 rounded-xl ">tracks list</div>
+            <div className="border-1 row-span-4 col-start-2 row-start-2 rounded-xl ">
+              <TrackList
+          tracks={tracks}
+          currentIndex={currentIndex}
+          isPlaying={isPlaying} 
+          onTrackSelect={handleTrackSelect}
+          onToggleLike={toggleLiked}
+        />
+            </div>
             <div className=" col-start-3 row-start-1 border-[#8b8b8b]">
               <ProfileIcon toggle={handleClick}/>
             </div>

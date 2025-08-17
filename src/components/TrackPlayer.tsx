@@ -13,11 +13,12 @@ interface Props {
   trackList: TrackData[];
   currentIndex: number;
   setCurrentIndex: Dispatch<SetStateAction<number>>;
-
+    isPlaying: boolean,
+    setIsPlaying: (value: boolean) => void;
   shuffle: boolean;
   loop: boolean;
-  onShuffleToggle: () => void;
-  onLoopToggle: () => void;
+    onShuffleToggle: () => void;
+    onLoopToggle: () => void;
 }
 
 const generateShuffleOrder = (length: number, currentIndex: number) => {
@@ -33,13 +34,13 @@ export default function TrackPlayer({
   trackList,
   currentIndex,
   setCurrentIndex,
-
+  isPlaying,
+  setIsPlaying,
   shuffle,
   loop,
   onShuffleToggle,
   onLoopToggle,
 }: Props) {
-  const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const [shuffleOrder, setShuffleOrder] = useState<number[]>([]);
@@ -56,6 +57,8 @@ export default function TrackPlayer({
     }
   }, [shuffle, trackList.length, currentIndex]);
 
+    
+  
 
   const handlePlayPause = () => {
     if (!audioRef.current) return;
@@ -183,11 +186,11 @@ const formatTime = (time: number) => { //per minuti e secondi
         onClick={handleSeek}
       >
         <div
-          className="relative h-1 bg-red-600 rounded-xs transition-all duration-200 ease-linear "
+          className="relative h-1 bg-[#ec2828] rounded-xs transition-all duration-200 ease-linear "
           style={{ width: `${progress}%` }}
         >
             <div
-        className="absolute right-[-0.26rem] top-[-0.19rem]  w-2.5 h-2.5 bg-red-600  rounded-full transition-all duration-200 ease-linear"
+        className="absolute right-[-0.26rem] top-[-0.19rem]  w-2.5 h-2.5 bg-[#ec2828]  rounded-full transition-all duration-200 ease-linear"
         
       onClick={handleSeek}/>
         </div>
