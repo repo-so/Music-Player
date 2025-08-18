@@ -7,7 +7,6 @@ import BigSquare from "./BigSquare.tsx"
 import TrackPlayer from './TrackPlayer.tsx';
 import VolumeBar from './VolumeBar.tsx';
 import ProfileIcon from './ProfileIcon.tsx'
-import ClockCard from './ClockCard.tsx'
 import TrackList from './TrackList.tsx'
 
 export default function Container() {
@@ -35,7 +34,7 @@ export default function Container() {
   //volume bar below
   const [volume, setVolume] = useState(75);
 const [isMuted, setIsMuted] = useState(false);
-const [previousVolume, setPreviousVolume] = useState(75); //so when its muted & umuted it comes back to the previous
+const [previousVolume, setPreviousVolume] = useState(75); //so when its muted & umuted it comes back to the previous, elementare watson
 
 const handleVolumeChange = (newVolume: number) => {
   setVolume(newVolume);
@@ -62,6 +61,7 @@ const [isClicked, setIsClicked] = useState(false);
 
 const handleTrackSelect = (index: number) => {
     setCurrentIndex(index);
+    setIsPlaying(true)
   };
 
   return (
@@ -86,7 +86,7 @@ const handleTrackSelect = (index: number) => {
 </div>   
 
             
-            <div className="border-1 row-span-4 col-start-2 row-start-1 rounded-xl ">
+            <div className="border row-span-4  col-start-2  row-start-1 rounded-xl border-[#8b8b8b]">
               <TrackList
           tracks={tracks}
           currentIndex={currentIndex}
@@ -99,7 +99,7 @@ const handleTrackSelect = (index: number) => {
               <ProfileIcon toggle={handleClick}/>
             </div>
 
-            <div className="border-1 row-span-3 row-start-2 col-start-3 rounded-xl px-1">
+            <div className="border border-[#8b8b8b]  row-span-3 row-start-2 col-start-3 rounded-xl px-1">
               <VolumeBar
                     volume={volume}
                     isMuted={isMuted}

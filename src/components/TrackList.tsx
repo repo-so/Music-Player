@@ -1,5 +1,5 @@
 import type { TrackData } from '../assets/data/songsData.ts';
-import { Play, Heart, Music } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 interface TrackListProps {
   tracks: TrackData[];
@@ -21,9 +21,9 @@ return (
 
     
     <div className="bg-[#202020] rounded-xl py-3 px-1.5 w-full max-w-md">
-      <h3 className="text-white font-poppins text-center mb-4 px-2">Playlist</h3>
+      <h3 className="text-white font-poppins text-center mb-4 px-2">Your Playlist</h3>
       
-      <div className="max-h-85 overflow-y-auto  scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+      <div className="max-h-85 overflow-y-auto  custom-scrollbar">
         <div className="space-y-1.5">
           {tracks.map((track, index) => (
             <div
