@@ -20,52 +20,52 @@ export default function TrackList({
 return (
 
     
-    <div className="bg-[#202020] rounded-lg p-4 w-full max-w-md">
-      <h3 className="text-white text-lg font-semibold mb-4 px-2">Playlist</h3>
+    <div className="bg-[#202020] rounded-xl py-3 px-1.5 w-full max-w-md">
+      <h3 className="text-white font-poppins text-center mb-4 px-2">Playlist</h3>
       
-      <div className="max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
-        <div className="space-y-1">
+      <div className="max-h-85 overflow-y-auto  scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+        <div className="space-y-1.5">
           {tracks.map((track, index) => (
             <div
               key={track.id}
               onClick={() => onTrackSelect(index)}
-              className={`flex items-center p-3 mx-1 rounded-lg cursor-pointer transition-all duration-200 group ${
+              className={`flex items-center p-1.5  mx-1 rounded-lg cursor-pointer transition-all duration-200 group ${
                 currentIndex === index
                   ? 'bg-[#626262]/20'
                   : 'hover:bg-white/5'
               }`}
             >
               {/* Play Status Icon */}
-              <div className="flex-shrink-0 w-6 h-6 mr-3 flex items-center justify-center">
+              <div className="flex-shrink-0 w-11 h-11 mr-1.5 bg-[#3d3d3d] rounded-md flex items-center justify-center">
                 {currentIndex === index ? (
                   isPlaying ? (
-                    <div className="flex items-end space-x-0.5">
-                      <div className="w-1 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                      <div className="w-1 h-4 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-1 h-3 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="flex items-center space-x-0.5">
+                      <div className="w-1 h-2.5 bg-red-500 rounded-full animate-pulse"></div>
+                      <div className="w-1 h-5 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-1 h-3.5 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
                     </div>
                   ) : (
-                    <Play size={16} className="text-red-500 fill-red-500" />
+                    <img src={track.image} className='object-cover w-9.5 h-9.5 rounded-sm' alt={track.title} />
                   )
                 ) : (
-                  <Music size={16} className="text-gray-500 group-hover:text-white transition-colors" />
+                    <img src={track.image} className='object-cover w-9.5 h-9.5 rounded-sm' alt={track.title} />
                 )}
               </div>
 
               {/* Track Info */}
               <div className="flex-1 min-w-0">
-                <p className={`font-medium truncate ${
+                <p className={`font-poppins truncate text-sm/tight ${
                   currentIndex === index ? 'text-red-400' : 'text-white group-hover:text-red-400'
                 } transition-colors`}>
                   {track.title}
                 </p>
-                <p className="text-gray-400 text-sm truncate group-hover:text-gray-300 transition-colors">
+                <p className="text-gray-400 text-xs/tight truncate group-hover:text-gray-300 transition-colors">
                   {track.artist}
                 </p>
               </div>
 
               {/* Like Icon */}
-              <div className="flex-shrink-0 ml-3" >
+              <div className="flex-shrink-0 ml-2 mr-1" >
                 {onToggleLike ? (
     <button
       onClick={(e) => {
@@ -98,8 +98,8 @@ return (
       </div>
 
       {/* Track Count */}
-      <div className="mt-4 px-2">
-        <p className="text-gray-400 text-xs">
+      <div className="mt-3 h-4 px-2 text-center ">
+        <p className="text-gray-400 text-xs font-poppins mt-2 ">
           {tracks.length} track{tracks.length !== 1 ? 's' : ''} • Track {currentIndex + 1} playing
         </p>
       </div>

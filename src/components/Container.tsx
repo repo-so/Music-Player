@@ -66,7 +66,7 @@ const handleTrackSelect = (index: number) => {
 
   return (
     <div className="rounded-2xl bg-[#111111] border-1 border-[#8b8b8b]">
-  <div className="p-4  rounded-lg grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto_auto] auto-cols-auto auto-rows-auto gap-4 ">
+  <div className="p-4 pb-0.5  rounded-lg grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto_auto] auto-cols-auto auto-rows-auto gap-4 ">
 
 <div className="row-span-5">
         <div className='border-1 border-[#8b8b8b] rounded-xl overflow-hidden bg-gradient-to-b from-[#434343] from-0% via-[#303030] via-50% to-[#191919] to-100%'>
@@ -85,8 +85,8 @@ const handleTrackSelect = (index: number) => {
       </div>
 </div>   
 
-            <div className=" col-start-2 row-start-1 rounded-xl"><ClockCard/></div>
-            <div className="border-1 row-span-4 col-start-2 row-start-2 rounded-xl ">
+            
+            <div className="border-1 row-span-4 col-start-2 row-start-1 rounded-xl ">
               <TrackList
           tracks={tracks}
           currentIndex={currentIndex}
@@ -99,7 +99,7 @@ const handleTrackSelect = (index: number) => {
               <ProfileIcon toggle={handleClick}/>
             </div>
 
-            <div className="border-1 row-span-4 col-start-3 rounded-xl px-2">
+            <div className="border-1 row-span-3 row-start-2 col-start-3 rounded-xl px-1">
               <VolumeBar
                     volume={volume}
                     isMuted={isMuted}

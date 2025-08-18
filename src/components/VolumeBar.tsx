@@ -111,7 +111,7 @@ export default function VolumeBar({
             isDragging ? 'cursor-grabbing' : 'cursor-pointer'
           }`}>
         <div
-          className={`relative w-5  h-57 bg-gray-700 rounded-full transition-colors select-none ${
+          className={`relative w-3  h-57 bg-gray-700 rounded-full transition-colors select-none ${
             isDragging ? 'cursor-grabbing' : 'cursor-pointer hover:bg-gray-600'
           }`}
         >
@@ -124,7 +124,7 @@ export default function VolumeBar({
           
           {/* Volume Knob or Ball */}
           <div          
-            className={`absolute w-9 h-9 bg-white rounded-full border-3 border-red-600 transform -translate-x-1/2 left-1/2 transition-all duration-150 pointer-events-none ${
+            className={`absolute w-8 h-8 bg-white rounded-full border-3 border-red-600 transform -translate-x-1/2 left-1/2 transition-all duration-150 pointer-events-none ${
               isDragging ? 'scale-125 shadow-lg' : 'hover:scale-110'
             }`}
             style={{ 
@@ -147,4 +147,3 @@ export default function VolumeBar({
     </div>
   );
 }
-//the knob takes too much time to keep up with the actual red value bar, is there a way
